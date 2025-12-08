@@ -1,0 +1,15 @@
+div {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+header {
+  background-color: red;
+}
+
+main {
+  background-color: blue;
+}
+footer {
+  background-color: green;
+}
