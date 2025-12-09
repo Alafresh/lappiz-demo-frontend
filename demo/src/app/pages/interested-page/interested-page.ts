@@ -5,7 +5,9 @@ import { DividerContent } from '../../components/shared/divider-content/divider-
 import { InterestedList } from '../../components/interested/interested-list/interested-list';
 import { HeaderComponent } from '../../components/shared/header-component/header-component';
 import { PeoppleService } from '../../services/peopple-service';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { switchMap } from 'rxjs/operators';
+import { PersonCreate } from '../../core/api/models';
 
 @Component({
   selector: 'app-interested-page',
@@ -15,7 +17,24 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class InterestedPage {
   public peopleService = inject(PeoppleService);
 
-  public people = toSignal(this.peopleService.getPeopleClient(), {
-    initialValue: [],
-  });
+  private refreshTrigger = signal(0);
+
+  public people = toSignal(
+    toObservable(this.refreshTrigger).pipe(switchMap(() => this.peopleService.getPeopleClient())),
+    { initialValue: [] }
+  );
+
+  onNewPerson(personData: PersonCreate) {
+    this.peopleService.addPersonClient(personData).subscribe({
+      next: (newPerson) => {
+        console.log('Persona agregada:', newPerson);
+        // Recarga la lista
+        this.refreshTrigger.update((v) => v + 1);
+      },
+      error: (err) => {
+        console.error('Error al agregar persona:', err);
+        alert('Error al registrar la persona');
+      },
+    });
+  }
 }

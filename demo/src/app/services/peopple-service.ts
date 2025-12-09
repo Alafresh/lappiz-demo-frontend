@@ -15,7 +15,9 @@ export class PeoppleService {
   getPeopleClient(): Observable<Person[]> {
     return getPeople(this.http, environment.baseUrl).pipe(map((res) => res.body));
   }
-  addPersonClient(person: Person) {
-    addPerson(this.http, environment.baseUrl, { body: person } as any);
+  addPersonClient(person: Person): Observable<Person> {
+    return addPerson(this.http, environment.baseUrl, { body: person }).pipe(
+      map((res) => res.body!)
+    );
   }
 }

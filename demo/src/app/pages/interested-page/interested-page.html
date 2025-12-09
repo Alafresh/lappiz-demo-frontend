@@ -1,6 +1,6 @@
 <app-header-component />
-<main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
-  <app-interest-form-card />
+<main class="w-full mx-auto px-4 py-8 space-y-12">
+  <app-interest-form-card (newPerson)="onNewPerson($event)" />
   <app-divider-content />
   <app-interested-list [peopleList]="people()" />
 </main>
