@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-api": "ng-openapi-gen",
+    "generate-api-local": "curl http://localhost:8000/openapi.json -o openapi.json && ng-openapi-gen --input openapi.json",
+    "dev": "npm run generate-api && ng serve"
   },
   "prettier": {
     "printWidth": 100,
@@ -39,6 +42,7 @@
     "@tailwindcss/postcss": "^4.1.12",
     "daisyui": "^5.5.8",
     "jsdom": "^27.1.0",
+    "ng-openapi-gen": "^1.0.5",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.12",
     "typescript": "~5.9.2",

@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Person } from '../../../core/api/models';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-interested-card',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './interested-card.html',
 })
-export class InterestedCard {}
+export class InterestedCard {
+  person = input.required<Person>();
+}

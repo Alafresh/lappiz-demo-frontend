@@ -11,6 +11,8 @@
     </svg>
     <h1 class="text-2xl font-bold text-gray-800">Interesados Registrados</h1>
   </div>
-  <span class="text-gray-500 text-sm">2 registros</span>
+  <span class="text-gray-500 text-sm"> {{ peopleList().length }} registros</span>
 </div>
-<app-interested-card />
+@for (person of peopleList(); track person.id){
+<app-interested-card [person]="person" />
+}

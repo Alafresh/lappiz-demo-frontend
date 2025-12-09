@@ -1,4 +1,4 @@
-<a href="" class="hover-3d my-12 mx-2 cursor-pointer">
+<a class="hover-3d my-12 mx-2">
   <div class="card w-96 text-black bg-base-100 shadow-md border-red-600 border-t-8">
     <div class="card-body">
       <div class="flex items-start gap-4">
@@ -18,10 +18,10 @@
           </div>
         </div>
 
-        <!-- Info al lado -->
+        <!-- Info -->
         <div class="mx-4 flex-1">
           <!-- Nombre -->
-          <h3 class="font-semibold text-gray-900 text-lg mb-2">juan caicedo</h3>
+          <h3 class="font-semibold text-gray-900 text-lg mb-2">{{ person().nombre }}</h3>
 
           <!-- Email -->
           <div class="flex items-center gap-2 text-sm text-gray-600 mb-1">
@@ -33,7 +33,7 @@
                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            <span>alafresh16@gmail.com</span>
+            <span> {{ person().correo }} </span>
           </div>
 
           <!-- Fecha -->
@@ -46,7 +46,7 @@
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            <span>5 dic 2025, 11:50</span>
+            <span>{{ person().fecha | date : 'short' }}</span>
           </div>
         </div>
       </div>
