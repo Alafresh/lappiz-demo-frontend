@@ -18,6 +18,7 @@ export class InterestedPage {
   public peopleService = inject(PeoppleService);
 
   private refreshTrigger = signal(0);
+  errorMessage = signal('');
 
   public people = toSignal(
     toObservable(this.refreshTrigger).pipe(switchMap(() => this.peopleService.getPeopleClient())),
@@ -33,7 +34,11 @@ export class InterestedPage {
       },
       error: (err) => {
         console.error('Error al agregar persona:', err);
-        alert('Error al registrar la persona');
+        if (err.status === 409) {
+          this.errorMessage.set('Este correo ya está registrado');
+        } else {
+          this.errorMessage.set('Error al registrar. Por favor intenta nuevamente');
+        }
       },
     });
   }

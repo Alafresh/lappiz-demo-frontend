@@ -1,4 +1,4 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, input, output, signal, effect } from '@angular/core';
 import { PersonCreate } from '../../../core/api/models';
 
 @Component({
@@ -9,11 +9,21 @@ import { PersonCreate } from '../../../core/api/models';
 export class InterestFormCard {
   nombre = signal('');
   correo = signal('');
-
+  errorMessage = signal('');
+  errorConflict = input('');
   newPerson = output<PersonCreate>();
+
+  constructor() {
+    effect(() => {
+      if (this.errorConflict()) {
+        this.errorMessage.set(this.errorConflict());
+      }
+    });
+  }
 
   addNewPerson() {
     if (!this.nombre() || !this.correo()) {
+      this.errorMessage.set('Por favor completa todos los campos');
       return;
     }
 
@@ -29,5 +39,6 @@ export class InterestFormCard {
   resetFields() {
     this.nombre.set('');
     this.correo.set('');
+    this.errorMessage.set('');
   }
 }

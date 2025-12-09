@@ -1,5 +1,5 @@
 <!-- Header -->
-<div class="flex items-center justify-between my-6 mx-50">
+<div class="flex items-center justify-between my-6 lg:mx-50">
   <div class="flex items-center gap-2">
     <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
@@ -15,7 +15,7 @@
 </div>
 
 <!-- Grid de Cards - 5 columnas en pantallas grandes -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-40">
+<div class="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:mx-40">
   @for (person of peopleList(); track person.id) {
   <app-interested-card [person]="person" />
 
